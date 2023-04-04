@@ -88,3 +88,23 @@ An optional map of label key:value pairs to assign to the secret resources.
 Default is an empty map.
 EOD
 }
+
+variable "topics" {
+  type        = list(string)
+  default     = []
+  description = <<EOD
+EOD
+}
+
+variable "rotation_policy" {
+  type = object({
+    rotation_period    = string
+    next_rotation_time = number
+  })
+  default = {
+    rotation_period    = "30d"
+    next_rotation_time = 1000
+  }
+  description = <<EOD
+EOD
+}

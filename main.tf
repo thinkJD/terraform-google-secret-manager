@@ -12,6 +12,23 @@ resource "google_secret_manager_secret" "secret" {
   project   = var.project_id
   secret_id = var.id
   labels    = var.labels
+
+  dynamic "topics" {
+    for_each = var.topics
+    content {
+      name = "projects/topics/${topics.value}"
+    }
+  }
+
+  dynamic "rotation" {
+    for_each = length(var.rotation_policy) > 0 ? [1] : []
+    content {
+      next_rotation_time = rotation.valus.next_rotation_time
+      rotation_period    = rotation.value.rotation_period
+
+    }
+  }
+
   replication {
     dynamic "user_managed" {
       for_each = length(var.replication) > 0 ? [1] : []
