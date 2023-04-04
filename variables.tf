@@ -98,12 +98,12 @@ EOD
 
 variable "rotation_policy" {
   type = object({
-    rotation_period    = string
-    next_rotation_time = number
+    rotation_period    = number
+    next_rotation_time = string
   })
   default = {
-    rotation_period    = "30d"
-    next_rotation_time = 1000
+    rotation_period    = 0
+    next_rotation_time = ""
   }
   description = <<EOD
 EOD
